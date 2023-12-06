@@ -31,7 +31,7 @@ export default {
             confirmButtonText: "Confirmar",
             showLoaderOnConfirm: true,
             preConfirm: async (namAut) => {
-              if (namAut === book.autor) {
+              if (namAut.toLowerCase() === book.autor.toLowerCase()) {
                 await this.$axios.delete(`${this.$envRoute}/book/${book.id}`);
                 this.books.splice(book, 1);
                 this.$swal.fire({
