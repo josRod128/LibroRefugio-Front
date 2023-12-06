@@ -1,0 +1,37 @@
+<script setup>
+
+</script>
+
+<template>
+  <div class="greetings">
+    <h1 class="coffe">LibroRefugio</h1>
+    <hr>
+    <p>NUESTRA CASA, TUS HISTORIAS</p>
+  </div>
+</template>
+
+<style scoped>
+  @font-face {
+    font-family: 'BeauRivage';
+    src: url('../assets/fonts/BeauRivage-Regular.ttf');
+  }
+.coffe {
+  font-family: 'BeauRivage';
+  font-size: 5vw;
+}
+p{
+  color: #C0B2A4;
+  font-size: 2vw;
+}
+.greetings {
+  text-align: center;
+}
+hr{
+  margin-top: -21px;
+  width: 100%;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(230, 52, 98, 0.75), rgba(255, 255, 255, 0));
+}
+
+</style>
