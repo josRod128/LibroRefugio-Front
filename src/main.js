@@ -6,6 +6,7 @@ import 'element-plus/dist/index.css'
 import App from './App.vue'
 import router from './router'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import Swal from 'sweetalert2'
 
 import axios from 'axios';
 const axiosInstance = axios.create({
@@ -21,6 +22,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   }
 app.config.globalProperties.$axios = { ...axiosInstance };
 app.config.globalProperties.$envRoute = envRoute;
+app.config.globalProperties.$swal = Swal;
 app.use(ElementPlus)
 app.use(router)
 
