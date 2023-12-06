@@ -138,10 +138,20 @@ const options = Array.from({ length: 10000 }).map((_, idx) => ({
 }
 
 .el-button--primary {
-  background: #8bb4d1;
+  border-color: #C0B2A4;
+  background: #C0B2A4;
 }
-.el-button--primary {
-  background: #8bb4d1;
+.el-button--danger {
+  background: cadetblue;
+  border-color: cadetblue;
+}
+.el-button--danger.el-button:focus, .el-button--danger.el-button:hover {
+  background: rgb(106, 183, 185);
+  border-color: rgb(106, 183, 185);
+}
+.el-button--primary.el-button:focus, .el-button--primary.el-button:hover {
+  background: #dac8b6;
+  border-color: #dac8b6;
 }
 
 </style>

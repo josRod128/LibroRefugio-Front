@@ -9,7 +9,7 @@ import { Reading, DocumentAdd } from "@element-plus/icons-vue";
     <el-col :span="12" class="card">
       <Logo />
 
-      <el-row class="row-bg" justify="center">
+      <el-row class="row-bg" justify="center" style="margin-top: 20px;">
         <nav>
           <RouterLink to="/"
             ><el-icon><Reading /></el-icon> Libros</RouterLink
