@@ -11,8 +11,52 @@ export default {
     });
   },
   methods: {
-    deleteRow(index) {
-      this.books.splice(index, 1);
+    deleteRow(book) {
+      console.log(book)
+      this.$swal.fire({
+        title: "¿Estas seguro?",
+        text: "¡No podrás revertir esto!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, bórralo!",
+        cancelButtonText: "Cancelar"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$swal.fire({
+            title: "Ingresa el nombre del autor",
+            input: "text",
+            showCancelButton: true,
+            confirmButtonText: "Confirmar",
+            showLoaderOnConfirm: true,
+            preConfirm: async (namAut) => {
+              if (namAut === book.autor) {
+                await this.$axios.delete(`${this.$envRoute}/book/${book.id}`);
+                this.books.splice(book, 1);
+                this.$swal.fire({
+                  title: "¡Eliminado!",
+                  text: "El libro ha sido eliminado.",
+                  icon: "success",
+                  timer: 2000,
+                  timerProgressBar: true,
+                  showConfirmButton: false,
+                });
+              } else {
+                this.$swal.fire({
+                  title: "¡Error!",
+                  text: "El nombre del autor no coincide.",
+                  icon: "error",
+                  timer: 2000,
+                  timerProgressBar: true,
+                  showConfirmButton: false,
+                });
+              }
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+          })
+        }
+      });
     },
     prueba() {
       console.log("prueba");
@@ -33,7 +77,7 @@ export default {
       <template #default="scope">
           <el-row justify="space-around">
             <el-icon v-on:click.prevent="prueba()" class="edit"><Edit /></el-icon>
-            <el-icon v-on:click.prevent="deleteRow(scope.$index)" class="delete"><DeleteFilled/></el-icon>
+            <el-icon v-on:click.prevent="deleteRow(scope.row)" class="delete"><DeleteFilled/></el-icon>
 
           </el-row>
       </template>
