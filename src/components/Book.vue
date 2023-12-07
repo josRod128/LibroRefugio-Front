@@ -84,9 +84,6 @@ const validateAuthor = (rule: any, value: any, callback: any) => {
   callback();
 };
 const validatePublicationYear = (rule: any, value: any, callback: any) => {
-  if (modeloForm.publicationYear === 0) {
-    callback(new Error("Este campo es requerido"));
-  }
   if (
     new Date(modeloForm.publicationYear).getFullYear() <=
     new Date().getFullYear()
@@ -161,7 +158,6 @@ const submitForm = async (formEl: FormInstance | undefined) => {
               title: "¡Error!",
               text: error.message,
               icon: "error",
-              timer: 2000,
               timerProgressBar: true,
               showConfirmButton: false,
             });
@@ -194,9 +190,8 @@ const submitForm = async (formEl: FormInstance | undefined) => {
           .catch((error) => {
             Swal.fire({
               title: "¡Error!",
-              text: "El libro no se ha guardado correctamente.",
+              text: error.message,
               icon: "error",
-              timer: 2000,
               timerProgressBar: true,
               showConfirmButton: false,
             });
@@ -208,6 +203,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 
 const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
+  if (props.id) return;
   formEl.resetFields();
 };
 </script>
