@@ -1,10 +1,14 @@
 <script>
+import AvailabilityButton from '../components/AvailabilityButton.vue';
 export default {
     data() {
         return {
             books: [],
             searchInput: "",
         };
+    },
+    components: {
+        AvailabilityButton,
     },
     mounted() {
         this.$axios.get(`${this.$envRoute}/books`).then((response) => {
@@ -110,8 +114,7 @@ export default {
     <!-- <el-table-column prop="address" label="Address" width="600" /> -->
     <el-table-column prop="available" label="Disponible">
       <template #default="scope">
-        <el-tag v-if="scope.row.available" type="success">Disponible</el-tag>
-        <el-tag v-else type="danger">No disponible</el-tag>
+        <AvailabilityButton :available="scope.row.available" :id="scope.row.id" />
       </template>
     </el-table-column>
 
@@ -130,7 +133,17 @@ export default {
   </el-table>
 </template>
 
-<style>
+<style scoped>
+@media screen and (max-width: 1175px) {
+  button{
+    width: 100%;
+    font-size: xx-small;
+  }
+}
+a,i{
+  display: flex;
+  font-size: large;
+}
 .cell {
   font-size: 1.2rem;
 }
