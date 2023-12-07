@@ -25,6 +25,7 @@ onBeforeMount(() => {
             0
           );
           modeloForm.isbn = response.data.isbn;
+          modeloForm.available = response.data.available;
         } else {
           Swal.fire({
             title: "¡Error!",
@@ -53,6 +54,7 @@ interface ReglasCampos {
   author: string;
   publicationYear: Date;
   isbn: string;
+  available: boolean;
 }
 
 const RefForm = ref<FormInstance>();
@@ -61,6 +63,7 @@ const modeloForm = reactive<ReglasCampos>({
   author: "",
   publicationYear: new Date(),
   isbn: "",
+  available: true,
 });
 
 const validateTitle = (rule: any, value: any, callback: any) => {
@@ -219,6 +222,15 @@ const resetForm = (formEl: FormInstance | undefined) => {
     status-icon
     style="width: 90%; margin-top: 20px"
   >
+    <el-row class="row-bg" justify="end" v-if="props.id">
+      <el-col :span="12">
+        <el-row class="row-bg" :gutter="20" align="bottom" justify="end">
+          <el-form-item class="switch" :label="`Marcar como ${(modeloForm.available)?'no disponible':'disponible'}`">
+            <el-switch v-model="modeloForm.available" />
+          </el-form-item>
+        </el-row>
+      </el-col>
+    </el-row>
     <el-row class="row-bg" justify="end">
       <el-col :span="12">
         <el-row class="row-bg" :gutter="20" align="bottom">
@@ -270,6 +282,19 @@ const resetForm = (formEl: FormInstance | undefined) => {
 </template>
 
 <style>
+.switch {
+  align-items: center;
+  display: flex !important;  
+}
+.switch label {
+  font-size: 1.2rem !important;
+}
+.switch .el-form-item__label {
+  display: contents !important;
+}
+.switch .el-form-item__content {
+  margin-left: 10px;
+}
 .demo-ruleForm .el-form-item__label {
   color: #181818;
   font-size: 1.5rem;
