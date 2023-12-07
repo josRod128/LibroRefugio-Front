@@ -108,6 +108,12 @@ export default {
     <el-table-column prop="yearPublication" label="Año de publicacion" />
     <el-table-column prop="isbn" label="ISBN" />
     <!-- <el-table-column prop="address" label="Address" width="600" /> -->
+    <el-table-column prop="available" label="Disponible">
+      <template #default="scope">
+        <el-tag v-if="scope.row.available" type="success">Disponible</el-tag>
+        <el-tag v-else type="danger">No disponible</el-tag>
+      </template>
+    </el-table-column>
 
     <el-table-column fixed="right" label="Acción" width="100">
       <template #default="scope">
