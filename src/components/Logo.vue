@@ -1,4 +1,10 @@
 <script setup>
+  const props = defineProps({
+    text: {
+      type: String,
+      default: "NUESTRA CASA, TUS HISTORIAS"
+    }
+  })
 
 </script>
 
@@ -6,7 +12,7 @@
   <div class="greetings">
     <h1 class="coffe">LibroRefugio</h1>
     <hr>
-    <p>NUESTRA CASA, TUS HISTORIAS</p>
+    <p>{{ text }}</p>
   </div>
 </template>
 
