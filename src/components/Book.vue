@@ -4,6 +4,7 @@ import type { FormInstance, FormRules } from "element-plus";
 import Swal from "sweetalert2";
 import axios from "axios";
 const envRoute = process.env.VITE_ROUTE_BACK;
+var edit = false;
 
 const props = defineProps({
   id: {
@@ -12,20 +13,20 @@ const props = defineProps({
 });
 
 onBeforeMount(() => {
-  console.log(props.id);
   if (props.id) {
     axios
       .get(`${envRoute}/book/${props.id}`)
       .then((response) => {
-        if (response.status == 200) {
-          modeloForm.title = response.data.title;
-          modeloForm.author = response.data.author;
+        if (response.data.status == 200) {
+          modeloForm.title = response.data.book.title;
+          modeloForm.author = response.data.book.author;
           modeloForm.publicationYear = new Date(
-            response.data.yearPublication,
+            response.data.book.yearPublication,
             0
           );
-          modeloForm.isbn = response.data.isbn;
-          modeloForm.available = response.data.available;
+          modeloForm.isbn = response.data.book.isbn;
+          modeloForm.available = response.data.book.available;
+          edit = true;
         } else {
           Swal.fire({
             title: "¡Error!",
@@ -40,7 +41,7 @@ onBeforeMount(() => {
       .catch((error) => {
         Swal.fire({
           title: "¡Error!",
-          text: error.message,
+          text: error.message+":  --"+error.response.data+"--",
           icon: "error",
           timerProgressBar: true,
           showConfirmButton: false,
@@ -132,39 +133,49 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   formEl.validate(async (valid, fields) => {
     if (valid) {
       if (props.id) {
-        axios
-          .put(`${envRoute}/book/${props.id}`, modeloForm)
-          .then((response) => {
-            if (response.status == 200) {
-              Swal.fire({
-                title: "¡Guardado!",
-                text: "El libro se ha guardado correctamente.",
-                icon: "success",
-                timer: 2000,
-                timerProgressBar: true,
-                showConfirmButton: false,
-              });
-              resetForm(formEl);
-            } else {
+        if (edit){
+          axios
+            .put(`${envRoute}/book/${props.id}`, modeloForm)
+            .then((response) => {
+              if (response.status == 200) {
+                Swal.fire({
+                  title: "¡Guardado!",
+                  text: "El libro se ha guardado correctamente.",
+                  icon: "success",
+                  timer: 2000,
+                  timerProgressBar: true,
+                  showConfirmButton: false,
+                });
+                resetForm(formEl);
+              } else {
+                Swal.fire({
+                  title: "¡Error!",
+                  text: "El libro no se ha guardado correctamente.",
+                  icon: "error",
+                  timer: 2000,
+                  timerProgressBar: true,
+                  showConfirmButton: false,
+                });
+              }
+            })
+            .catch((error) => {
               Swal.fire({
                 title: "¡Error!",
-                text: "El libro no se ha guardado correctamente.",
+                text: error.message,
                 icon: "error",
-                timer: 2000,
                 timerProgressBar: true,
                 showConfirmButton: false,
               });
-            }
-          })
-          .catch((error) => {
-            Swal.fire({
-              title: "¡Error!",
-              text: error.message,
-              icon: "error",
-              timerProgressBar: true,
-              showConfirmButton: false,
             });
+        }else{
+          Swal.fire({
+            title: "¡Error!",
+            text: "No tenemos este libro en nuestra base de datos.",
+            icon: "error",
+            timerProgressBar: true,
+            showConfirmButton: false,
           });
+        }
       } else {
         axios
           .post(`${envRoute}/book`, modeloForm)
