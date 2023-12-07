@@ -86,7 +86,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   formEl.validate(async (valid, fields) => {
     if (valid) {
       axios
-        .post(`${envRoute}/books`, modeloForm)
+        .post(`${envRoute}/book`, modeloForm)
         .then((response) => {
           if (response.status == 200) {
             Swal.fire({
