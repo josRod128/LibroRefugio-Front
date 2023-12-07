@@ -64,7 +64,7 @@ const modeloForm = reactive<ReglasCampos>({
 });
 
 const validateTitle = (rule: any, value: any, callback: any) => {
-  let regex = /^[A-Za-z0-9\s]+$/g;
+  let regex = /^[A-Za-zÀ-ÿ\u00f1\u00d10-9\s]+$/g;
   if (regex.test(modeloForm.title)) {
     if (!RefForm.value) return;
     // RefForm.value.validateField('title', () => null)
@@ -74,7 +74,7 @@ const validateTitle = (rule: any, value: any, callback: any) => {
   callback();
 };
 const validateAuthor = (rule: any, value: any, callback: any) => {
-  let regex = /^[A-Za-z\s]+$/g;
+  let regex = /^[A-Za-zÀ-ÿ\u00f1\u00d1\s]+$/g;
   if (regex.test(modeloForm.author)) {
     if (!RefForm.value) return;
     // RefForm.value.validateField('author', () => null)
