@@ -281,7 +281,13 @@ const resetForm = (formEl: FormInstance | undefined) => {
   </el-form>
 </template>
 
-<style>
+<style scoped>
+.el-button{
+  font-size: 1.5rem;
+}
+.el-form-item .el-form-item__label {
+  font-size: 1.5rem !important;
+}
 .switch {
   align-items: center;
   display: flex !important;  
