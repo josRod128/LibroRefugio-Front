@@ -137,7 +137,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
           axios
             .put(`${envRoute}/book/${props.id}`, modeloForm)
             .then((response) => {
-              if (response.status == 200) {
+              if (response.data.status == 200) {
                 Swal.fire({
                   title: "¡Guardado!",
                   text: "El libro se ha guardado correctamente.",
@@ -150,9 +150,8 @@ const submitForm = async (formEl: FormInstance | undefined) => {
               } else {
                 Swal.fire({
                   title: "¡Error!",
-                  text: "El libro no se ha guardado correctamente.",
+                  text: response.data.message,
                   icon: "error",
-                  timer: 2000,
                   timerProgressBar: true,
                   showConfirmButton: false,
                 });
@@ -161,7 +160,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
             .catch((error) => {
               Swal.fire({
                 title: "¡Error!",
-                text: error.message,
+                text: error.message+":  --"+error.response.data+"--",
                 icon: "error",
                 timerProgressBar: true,
                 showConfirmButton: false,
@@ -180,7 +179,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
         axios
           .post(`${envRoute}/book`, modeloForm)
           .then((response) => {
-            if (response.status == 200) {
+            if (response.data.status == 200) {
               Swal.fire({
                 title: "¡Guardado!",
                 text: "El libro se ha guardado correctamente.",
@@ -193,9 +192,8 @@ const submitForm = async (formEl: FormInstance | undefined) => {
             } else {
               Swal.fire({
                 title: "¡Error!",
-                text: "El libro no se ha guardado correctamente.",
+                text: response.data.message,
                 icon: "error",
-                timer: 2000,
                 timerProgressBar: true,
                 showConfirmButton: false,
               });
@@ -204,7 +202,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
           .catch((error) => {
             Swal.fire({
               title: "¡Error!",
-              text: error.message,
+              text: error.message+":  --"+error.response.data+"--",
               icon: "error",
               timerProgressBar: true,
               showConfirmButton: false,
