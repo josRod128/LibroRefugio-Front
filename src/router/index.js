@@ -27,7 +27,8 @@ const router = createRouter({
     {
       path: '/book/:id',
       name: 'bookEdit',
-      component: BookEdit
+      component: BookEdit,
+      props: true
     }
   ]
 })

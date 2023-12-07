@@ -1,90 +1,92 @@
 <script>
 export default {
-  data() {
-    return {
-      books: [],
-      searchInput: "",
-    };
-  },
-  mounted() {
-    this.$axios.get(`${this.$envRoute}/books`).then((response) => {
-      this.books = response.data;
-    });
-  },
-  methods: {
-    deleteRow(book) {
-      console.log(book);
-      this.$swal
-        .fire({
-          title: "¿Estas seguro?",
-          text: "¡No podrás revertir esto!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Si, bórralo!",
-          cancelButtonText: "Cancelar",
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            this.$swal.fire({
-              title: "Ingresa el nombre del autor",
-              input: "text",
-              showCancelButton: true,
-              confirmButtonText: "Confirmar",
-              showLoaderOnConfirm: true,
-              preConfirm: async (namAut) => {
-                if (namAut.toLowerCase() === book.autor.toLowerCase()) {
-                  await this.$axios.delete(`${this.$envRoute}/book/${book.id}`);
-                  this.books.splice(book, 1);
-                  this.$swal.fire({
-                    title: "¡Eliminado!",
-                    text: "El libro ha sido eliminado.",
-                    icon: "success",
-                    timer: 2000,
-                    timerProgressBar: true,
-                    showConfirmButton: false,
-                  });
-                } else {
-                  this.$swal.fire({
-                    title: "¡Error!",
-                    text: "El nombre del autor no coincide.",
-                    icon: "error",
-                    timer: 2000,
-                    timerProgressBar: true,
-                    showConfirmButton: false,
-                  });
-                }
-              },
-              allowOutsideClick: () => !Swal.isLoading(),
-            });
-          }
-        });
+    data() {
+        return {
+            books: [],
+            searchInput: "",
+        };
     },
-    prueba() {
-      console.log("prueba");
-    },
-    search() {
-      if (this.searchInput != "") {
-        this.$axios
-          .get(`${this.$envRoute}/books/search/${this.searchInput}`)
-          .then((response) => {
-            this.books = response.data;
-          });
-      }
-    },
-  },
-  watch: {
-    searchInput() {
-      if (this.searchInput == "") {
+    mounted() {
         this.$axios.get(`${this.$envRoute}/books`).then((response) => {
-          this.books = response.data;
+            this.books = response.data;
         });
-      }else{
-        this.search();
-      }
     },
-  },
+    methods: {
+        deleteRow(book) {
+            console.log(book);
+            this.$swal
+                .fire({
+                title: "¿Estas seguro?",
+                text: "¡No podrás revertir esto!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si, bórralo!",
+                cancelButtonText: "Cancelar",
+            })
+                .then((result) => {
+                if (result.isConfirmed) {
+                    this.$swal.fire({
+                        title: "Ingresa el nombre del autor",
+                        input: "text",
+                        showCancelButton: true,
+                        confirmButtonText: "Confirmar",
+                        showLoaderOnConfirm: true,
+                        preConfirm: async (namAut) => {
+                            if (namAut.toLowerCase() === book.autor.toLowerCase()) {
+                                await this.$axios.delete(`${this.$envRoute}/book/${book.id}`);
+                                this.books.splice(book, 1);
+                                this.$swal.fire({
+                                    title: "¡Eliminado!",
+                                    text: "El libro ha sido eliminado.",
+                                    icon: "success",
+                                    timer: 2000,
+                                    timerProgressBar: true,
+                                    showConfirmButton: false,
+                                });
+                            }
+                            else {
+                                this.$swal.fire({
+                                    title: "¡Error!",
+                                    text: "El nombre del autor no coincide.",
+                                    icon: "error",
+                                    timer: 2000,
+                                    timerProgressBar: true,
+                                    showConfirmButton: false,
+                                });
+                            }
+                        },
+                        allowOutsideClick: () => !Swal.isLoading(),
+                    });
+                }
+            });
+        },
+        prueba() {
+            console.log("prueba");
+        },
+        search() {
+            if (this.searchInput != "") {
+                this.$axios
+                    .get(`${this.$envRoute}/books/search/${this.searchInput}`)
+                    .then((response) => {
+                    this.books = response.data;
+                });
+            }
+        },
+    },
+    watch: {
+        searchInput() {
+            if (this.searchInput == "") {
+                this.$axios.get(`${this.$envRoute}/books`).then((response) => {
+                    this.books = response.data;
+                });
+            }
+            else {
+                this.search();
+            }
+        },
+    },
 };
 </script>
 
@@ -110,8 +112,10 @@ export default {
     <el-table-column fixed="right" label="Acción" width="100">
       <template #default="scope">
         <el-row justify="space-around">
-          <el-icon v-on:click.prevent="prueba()" class="edit"><Edit /></el-icon>
-          <el-icon v-on:click.prevent="deleteRow(scope.row)" class="delete"
+          <router-link :to="`/book/${scope.row.id}`">
+            <el-icon class="edit"><Edit /></el-icon>
+          </router-link>
+          <el-icon v-on:click="deleteRow(scope.row)" class="delete"
             ><DeleteFilled
           /></el-icon>
         </el-row>
