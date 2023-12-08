@@ -5,14 +5,17 @@ export default {
         return {
             books: [],
             searchInput: "",
+            totalDatos: 0,
+            currentPage: 1,
         };
     },
     components: {
         AvailabilityButton,
     },
     mounted() {
-        this.$axios.get(`${this.$envRoute}/books`).then((response) => {
-            this.books = response.data;
+        this.$axios.get(`${this.$envRoute}/books/${this.currentPage}`).then((response) => {
+            this.books = response.data.books;
+            this.totalDatos = response.data.total;
         });
     },
     methods: {
@@ -66,18 +69,27 @@ export default {
                 }
             });
         },
-        prueba() {
-            console.log("prueba");
+        currentPageChange(val) {
+          if (this.searchInput == "") {
+            this.$axios.get(`${this.$envRoute}/books/${val}`).then((response) => {
+              this.books = response.data.books;
+              this.totalDatos = response.data.total;
+            });
+          }
+          else {
+            this.search();
+          }
         },
         search() {
             if (this.searchInput != "") {
                 this.$axios
-                    .get(`${this.$envRoute}/books/search/${this.searchInput}`)
+                    .get(`${this.$envRoute}/books/search/${encodeURIComponent(this.searchInput)}/${this.currentPage}`)
                     .then((response) => {
-                    this.books = response.data;
+                      this.books = response.data.books;
+                      this.totalDatos = response.data.total;
                 });
             }
-        },
+        }
     },
     watch: {
         searchInput() {
@@ -131,6 +143,7 @@ export default {
       </template>
     </el-table-column>
   </el-table>
+  <el-pagination background layout="prev, pager, next" :total="totalDatos" v-model:current-page="currentPage" @current-change="currentPageChange"/>
 </template>
 
 <style scoped>
