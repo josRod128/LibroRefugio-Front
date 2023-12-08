@@ -324,23 +324,4 @@ const resetForm = (formEl: FormInstance | undefined) => {
   margin: 0 10px;
   font-size: 1.5rem;
 }
-
-.el-button--primary {
-  border-color: #c0b2a4;
-  background: #c0b2a4;
-}
-.el-button--danger {
-  background: cadetblue;
-  border-color: cadetblue;
-}
-.el-button--danger.el-button:focus,
-.el-button--danger.el-button:hover {
-  background: rgb(106, 183, 185);
-  border-color: rgb(106, 183, 185);
-}
-.el-button--primary.el-button:focus,
-.el-button--primary.el-button:hover {
-  background: #dac8b6;
-  border-color: #dac8b6;
-}
 </style>

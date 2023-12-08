@@ -18,3 +18,30 @@ a,
     place-items: center; */
   }
 }
+.el-pagination.is-background .el-pager li.is-active{
+  background-color: cadetblue !important; ;
+}
+.el-button--danger,.swal2-cancel {
+  border-color: #c0b2a4 !important;
+  background: #c0b2a4 !important;
+}
+.el-button--primary,.swal2-confirm {
+  background: cadetblue !important;
+  border-color: cadetblue !important;
+}
+.el-button--primary.el-button:focus,
+.el-button--primary.el-button:hover {
+  background: rgb(106, 183, 185) !important;
+  border-color: rgb(106, 183, 185) !important;
+}
+.el-button--danger.el-button:focus,
+.el-button--danger.el-button:hover {
+  background: #dac8b6 !important;
+  border-color: #dac8b6 !important;
+}
+div:where(.swal2-container) div:where(.swal2-actions):not(.swal2-loading) .swal2-styled:hover {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.247), rgba(255, 255, 255, 0.247)) !important;
+}
+div:where(.swal2-container) button:where(.swal2-styled).swal2-default-outline:focus {
+  box-shadow: 0 0 0 3px rgba(201, 201, 201, 0.5) !important;
+}
