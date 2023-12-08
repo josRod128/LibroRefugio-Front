@@ -125,7 +125,7 @@ export default {
       />
     </div>
   </el-row>
-  <el-table :data="books" max-height="250">
+  <el-table row-key="id" :data="books" max-height="250">
     <el-table-column prop="title" label="Titulo" />
     <el-table-column prop="author" label="Autor" />
     <el-table-column prop="yearPublication" label="Año de publicación" />
