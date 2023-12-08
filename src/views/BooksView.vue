@@ -147,7 +147,18 @@ export default {
 </template>
 
 <style scoped>
-@media screen and (max-width: 1175px) {
+@media screen and (max-width: 922px) {
+  button{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 743px) {
+  button{
+    width: 100%;
+    font-size: xx-small;
+  }
+}
+@media screen and (max-width: 696px) {
   button{
     width: 100%;
     font-size: xx-small;

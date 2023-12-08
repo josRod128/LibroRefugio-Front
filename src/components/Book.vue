@@ -232,7 +232,7 @@ const resetForm = (formEl: FormInstance | undefined) => {
     style="width: 90%; margin-top: 20px"
   >
     <el-row class="row-bg" justify="end" v-if="props.id">
-      <el-col :span="12">
+      <el-col  :xs="20" :sm="18" :md="15" :lg="15" :xl="15">
         <el-row class="row-bg" :gutter="20" align="bottom" justify="end">
           <el-form-item class="switch" :label="`Marcar como ${(modeloForm.available)?'no disponible':'disponible'}`">
             <el-switch v-model="modeloForm.available" />
@@ -276,7 +276,7 @@ const resetForm = (formEl: FormInstance | undefined) => {
     </el-row>
 
     <el-row class="row-bg" style="margin-top: 20px">
-      <el-col :span="24">
+      <el-col  :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
         <el-row justify="center">
           <el-button type="danger" @click="resetForm(RefForm)"
             >Borrar datos</el-button
@@ -291,6 +291,11 @@ const resetForm = (formEl: FormInstance | undefined) => {
 </template>
 
 <style scoped>
+@media screen and (max-width: 441px) {
+  .el-button--primary{
+    margin-top: 10px;
+  }
+}
 .el-button{
   font-size: 1.5rem;
 }

@@ -6,7 +6,7 @@ import { Reading, DocumentAdd } from "@element-plus/icons-vue";
 
 <template>
   <el-row class="row-bg" justify="center">
-    <el-col :span="12" class="card">
+    <el-col :xs="20" :sm="18" :md="15" :lg="15" :xl="15" class="card">
       <Logo />
 
       <el-row class="row-bg" justify="center" style="margin-top: 20px;">
@@ -27,6 +27,11 @@ import { Reading, DocumentAdd } from "@element-plus/icons-vue";
 </template>
 
 <style scoped>
+@media screen and (max-width: 1175px) {
+  a{
+    font-size: large !important;
+  }
+}
 .card {
   background: #f3f4f6;
   border-radius: 10px;

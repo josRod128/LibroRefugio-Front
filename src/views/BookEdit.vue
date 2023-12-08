@@ -1,8 +1,8 @@
 <template>
   <el-row class="row-bg" justify="center">
-      <el-col :span="12" class="card">
+      <el-col :xs="20" :sm="18" :md="15" :lg="15" :xl="15" class="card">
         <router-link to="/">
-          <el-button type="primary" :icon="ArrowLeft">Previous Page</el-button>
+          <el-button type="primary" :icon="ArrowLeft">Regresar</el-button>
         </router-link>
         <Logo text="Edicion"/>
         <Book :id="props.id" />

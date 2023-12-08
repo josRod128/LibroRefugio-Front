@@ -17,17 +17,33 @@
 </template>
 
 <style scoped>
-  @font-face {
-    font-family: 'BeauRivage';
-    src: url('../assets/fonts/BeauRivage-Regular.ttf');
+@font-face {
+  font-family: 'BeauRivage';
+  src: url('../assets/fonts/BeauRivage-Regular.ttf');
+}
+@media screen and (min-width: 922px) {
+  .coffe {
+    font-size: 5vw;
   }
+  p{
+    font-size: 2vw;
+  }
+  
+}
+@media screen and (max-width: 922px) {
+  .coffe {
+    margin-top: 10px;
+    font-size: 11vw;
+  }
+  p{
+    font-size: 7vw;
+  }
+}
 .coffe {
   font-family: 'BeauRivage';
-  font-size: 5vw;
 }
 p{
   color: #C0B2A4;
-  font-size: 2vw;
 }
 .greetings {
   text-align: center;
