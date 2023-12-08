@@ -11,7 +11,7 @@ npm install
 crear archivo .env definiendo la ruta del back (basarse en .env_example)
 
 ## Paso 3.-
-puesta en marcha del servidor back
+puesta en marcha del servidor
 ```sh
 npm run dev
 ```
