@@ -33,7 +33,9 @@ import { Reading, DocumentAdd } from "@element-plus/icons-vue";
   padding: 20px;
   margin-top: 20vh;
 }
-
+a:hover{
+  box-shadow: 0px 1.2px 1px -1px #d4597373;
+}
 a {
     margin: 0 10px;
     font-size: 1.5rem;
