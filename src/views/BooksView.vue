@@ -13,12 +13,15 @@ export default {
         AvailabilityButton,
     },
     mounted() {
-        this.$axios.get(`${this.$envRoute}/books/${this.currentPage}`).then((response) => {
-            this.books = response.data.books;
-            this.totalDatos = response.data.total;
-        });
+        this.getBooks();
     },
     methods: {
+        getBooks() {
+          this.$axios.get(`${this.$envRoute}/books/${this.currentPage}`).then((response) => {
+            this.books = response.data.books;
+            this.totalDatos = response.data.total;
+          });
+        },
         deleteRow(book) {
             console.log(book);
             this.$swal
@@ -41,9 +44,15 @@ export default {
                         confirmButtonText: "Confirmar",
                         showLoaderOnConfirm: true,
                         preConfirm: async (namAut) => {
-                            if (namAut.toLowerCase() === book.autor.toLowerCase()) {
+                            if (namAut.toLowerCase() === book.author.toLowerCase()) {
                                 await this.$axios.delete(`${this.$envRoute}/book/${book.id}`);
-                                this.books.splice(book, 1);
+                                if (this.searchInput != "") {
+                                    this.search();
+                                }
+                                else {
+                                  await this.getBooks();
+                                }
+
                                 this.$swal.fire({
                                     title: "¡Eliminado!",
                                     text: "El libro ha sido eliminado.",
@@ -94,9 +103,7 @@ export default {
     watch: {
         searchInput() {
             if (this.searchInput == "") {
-                this.$axios.get(`${this.$envRoute}/books`).then((response) => {
-                    this.books = response.data;
-                });
+                this.getBooks();
             }
             else {
                 this.search();
