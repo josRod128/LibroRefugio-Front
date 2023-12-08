@@ -240,27 +240,23 @@ const resetForm = (formEl: FormInstance | undefined) => {
         </el-row>
       </el-col>
     </el-row>
-    <el-row class="row-bg" justify="end">
-      <el-col :span="12">
-        <el-row class="row-bg" :gutter="20" align="bottom">
-          <el-col :xs="24" :sm="24" :md="12">
-            <el-form-item label="Año de publicación" prop="publicationYear">
-              <el-date-picker
-                v-model="modeloForm.publicationYear"
-                type="year"
-                placeholder="Año de publicación"
-                style="width: 100%"
-              />
-            </el-form-item>
-          </el-col>
-
-          <el-col :xs="24" :sm="24" :md="12">
-            <el-form-item label="ISBN" prop="isbn">
-              <el-input v-model="modeloForm.isbn" />
-            </el-form-item>
-          </el-col>
-        </el-row>
+    <el-row class="row-bg" :gutter="20">
+      <el-col :xs="24" :sm="24" :md="12">
+        <el-form-item label="Año de publicación" prop="publicationYear">
+          <el-date-picker
+            v-model="modeloForm.publicationYear"
+            type="year"
+            placeholder="Año de publicación"
+            style="width: 100%"
+          />
+        </el-form-item>
       </el-col>
+
+      <el-col :xs="24" :sm="24" :md="12">
+        <el-form-item label="ISBN" prop="isbn">
+          <el-input v-model="modeloForm.isbn" />
+        </el-form-item>
+      </el-col>      
     </el-row>
     <el-row class="row-bg" :gutter="20">
       <el-col :xs="24" :sm="24" :md="12">

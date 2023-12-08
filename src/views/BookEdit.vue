@@ -5,7 +5,9 @@
           <el-button type="primary" :icon="ArrowLeft">Regresar</el-button>
         </router-link>
         <Logo text="Edicion"/>
-        <Book :id="props.id" />
+        <el-row class="row-bg" justify="center">
+            <Book :id="props.id" />
+        </el-row>
     </el-col>
   </el-row>
 </template>
