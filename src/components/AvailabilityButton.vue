@@ -1,14 +1,15 @@
 <template>
-  <el-button v-on:click="change" :type="disponible ? 'primary' : 'danger'">{{
-    disponible ? "Disponible" : "No disponible"
+  <el-button v-on:click="change" :type="checkDisponible ? 'primary' : 'danger'">{{
+    checkDisponible ? "Disponible" : "No disponible"
   }}</el-button>
 </template>
 
 <script>
+
 export default {
   data() {
     return {
-      disponible: true,
+      disponible: null,
     };
   },
   props: {
@@ -32,6 +33,9 @@ export default {
         dangerMode: true,
       }).then((willChange) => {
         if (willChange.isConfirmed) {
+          if(this.checkDisponible){
+            this.disponible = this.available;
+          }
           this.$axios
             .put(`${this.$envRoute}/book/${this.id}`, {
               available: !this.disponible,
@@ -75,9 +79,15 @@ export default {
       });
     },
   },
-  created() {
-    this.disponible = this.available;
-  },
+  computed: {
+    checkDisponible() {
+      if(this.disponible == null){
+        return this.available;
+      }else{
+        return this.disponible;
+      }
+    },
+  }
 };
 </script>
 
