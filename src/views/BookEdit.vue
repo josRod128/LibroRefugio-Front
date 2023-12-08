@@ -4,7 +4,7 @@
         <router-link to="/">
           <el-button type="primary" :icon="ArrowLeft">Regresar</el-button>
         </router-link>
-        <Logo text="Edicion"/>
+        <Logo text="Edición"/>
         <el-row class="row-bg" justify="center">
             <Book :id="props.id" />
         </el-row>

@@ -26,7 +26,7 @@ export default {
             console.log(book);
             this.$swal
                 .fire({
-                title: "¿Estas seguro?",
+                title: "¿Estás seguro?",
                 text: "¡No podrás revertir esto!",
                 icon: "warning",
                 showCancelButton: true,
@@ -118,7 +118,7 @@ export default {
     <div>
       <el-input       
         v-model="searchInput"
-        placeholder="titulo o autor del libro"
+        placeholder="Titulo o autor del libro"
         prefix-icon="Search"
         input-style="display: inline-block;"
         clearable
@@ -128,7 +128,7 @@ export default {
   <el-table :data="books" max-height="250">
     <el-table-column prop="title" label="Titulo" />
     <el-table-column prop="author" label="Autor" />
-    <el-table-column prop="yearPublication" label="Año de publicacion" />
+    <el-table-column prop="yearPublication" label="Año de publicación" />
     <el-table-column prop="isbn" label="ISBN" />
     <!-- <el-table-column prop="address" label="Address" width="600" /> -->
     <el-table-column prop="available" label="Disponible">
