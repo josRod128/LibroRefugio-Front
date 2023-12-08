@@ -31,7 +31,7 @@ export default {
         buttons: true,
         dangerMode: true,
       }).then((willChange) => {
-        if (willChange) {
+        if (willChange.isConfirmed) {
           this.$axios
             .put(`${this.$envRoute}/book/${this.id}`, {
               available: !this.disponible,
